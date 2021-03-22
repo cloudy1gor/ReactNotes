@@ -1,7 +1,29 @@
-import React from "react";
+import React, { Component } from "react";
 
-const SeasonDisplay = () => {
-  return <div>Season Display!</div>;
-};
+export default class SeasonDisplay extends Component {
+  constructor(props) {
+    super(props);
 
-export default SeasonDisplay;
+    this.state = { lat: null, errorMessage: "Denied Geolocation" };
+
+    window.navigator.geolocation.getCurrentPosition(
+      (position) => {
+        // обновляю стейт
+        this.setState({ lat: position.coords.latitude });
+      },
+      (err) => {
+        this.setState({ errorMessage: err.message });
+      }
+    );
+  }
+
+  render() {
+    if (this.state.errorMessage && !this.state.lat) {
+      return <div>Error: {this.state.errorMessage}</div>;
+    } else if (!this.state.errorMessage && this.state.lat) {
+      return <div>Latitude: {this.state.lat}</div>;
+    } else {
+      return <div>Loading...</div>;
+    }
+  }
+}
