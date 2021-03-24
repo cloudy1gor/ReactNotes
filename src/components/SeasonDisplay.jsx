@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import SeasonDisplayComponent from "./SeasonDisplayComponent.jsx";
-import Spinner from "./Spinner.jsx";
+// import Spinner from "./Spinner.jsx";
 
 export default class SeasonDisplay extends Component {
   // Начальная инициализация компонента
@@ -28,8 +28,7 @@ export default class SeasonDisplay extends Component {
     );
   }
 
-  // рендеринг компонента
-  render() {
+  renderContent() {
     if (this.state.errorMessage && !this.state.lat) {
       return <div>Error: {this.state.errorMessage}</div>;
     }
@@ -38,7 +37,16 @@ export default class SeasonDisplay extends Component {
         <SeasonDisplayComponent lat={this.state.lat} />
       );
     }
-    // return <Spinner />;
+    // return <Spinner message="Please wait..." />;
     return <SeasonDisplayComponent lat={this.state.lat} />;
+  }
+
+  // рендеринг компонента
+  render() {
+    return (
+      <div className="border red">
+        {this.renderContent()}
+      </div>
+    );
   }
 }

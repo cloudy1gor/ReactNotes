@@ -220,7 +220,9 @@ const config = {
     }),
     // new SpriteLoaderPlugin(),
     new WebpackNotifierPlugin({ onlyOnError: true }),
-    new WebpackBar(),
+    new WebpackBar({
+      name: "WEBPACK",
+    }),
   ],
 };
 

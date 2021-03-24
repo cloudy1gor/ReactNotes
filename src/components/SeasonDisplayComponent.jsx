@@ -1,5 +1,6 @@
 import React from "react";
 
+// обьект с конфигом
 const seasonConfig = {
   summer: {
     text: "so warm!",
@@ -11,6 +12,7 @@ const seasonConfig = {
   },
 };
 
+// функция помошник
 const getSeason = (lat, month) => {
   if (month > 2 && month < 9) {
     return lat > 0 ? "summer" : "winter";
@@ -18,6 +20,7 @@ const getSeason = (lat, month) => {
   return lat > 0 ? "winter" : "summer";
 };
 
+// функциональный компонент
 const SeasonDisplayComponent = (props) => {
   const season = getSeason(
     props.lat,
