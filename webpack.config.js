@@ -1,11 +1,13 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 const WebpackNotifierPlugin = require("webpack-notifier");
 const WebpackBar = require("webpackbar");
-// const SpriteLoaderPlugin = require("svg-sprite-loader/plugin"); TODO-не получилось настроить
+// const SpriteLoaderPlugin = require("svg-sprite-loader/plugin"); -не получилось настроить
 const path = require("path");
 
 const ENV = process.env.npm_lifecycle_event;
@@ -34,7 +36,7 @@ const config = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    filename: "main.js",
   },
 
   devServer: {
@@ -43,7 +45,7 @@ const config = {
     port: 3000,
     overlay: true, // выводит на странице ошибку
     hot: true,
-    open: true,
+    open: false,
     stats: "errors-only",
     clientLogLevel: "none",
   },
@@ -68,7 +70,18 @@ const config = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: [
+              "@babel/preset-env",
+              "@babel/preset-react",
+            ],
+            plugins: [
+              [
+                "@babel/plugin-proposal-class-properties",
+                {
+                  loose: true,
+                },
+              ],
+            ],
           },
         },
       },
@@ -89,6 +102,11 @@ const config = {
 
           {
             loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: ["css-mqpacker", "autoprefixer"],
+              },
+            },
           },
 
           {
@@ -160,13 +178,29 @@ const config = {
     ],
   },
 
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: [
+            "default",
+            {
+              discardComments: { removeAll: true },
+            },
+          ],
+        },
+      }),
+    ],
+  },
+
   resolve: {
     extensions: ["*", ".js", ".jsx"],
   },
 
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "css/bundle.css",
+      filename: "css/style.css",
     }),
     new HtmlWebPackPlugin({
       template: "./src/index.html",
@@ -176,7 +210,10 @@ const config = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "./src/assets/images"),
+          from: path.resolve(
+            __dirname,
+            "./src/assets/images"
+          ),
           to: path.resolve(__dirname, "dist/assets/images"),
         },
       ],
@@ -184,12 +221,14 @@ const config = {
     // new SpriteLoaderPlugin(),
     new WebpackNotifierPlugin({ onlyOnError: true }),
     new WebpackBar(),
-    new BundleAnalyzerPlugin(),
   ],
 };
 
 if (isProd) {
-  config.plugins.push(new UglifyJSPlugin());
+  config.plugins.push(
+    new UglifyJSPlugin(),
+    new BundleAnalyzerPlugin()
+  );
 }
 
 module.exports = config;
