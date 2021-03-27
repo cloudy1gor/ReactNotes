@@ -1,7 +1,7 @@
 import React from "react";
 import faker from "faker";
 
-import "./scss/style.scss";
+import "./assets/stylesheets/style.scss";
 import Comment from "./components/Comment.jsx";
 import AppruvalCard from "./components/AppruvalCard.jsx";
 import SeasonDisplay from "./components/SeasonDisplay.jsx";
