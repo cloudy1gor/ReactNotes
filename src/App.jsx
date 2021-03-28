@@ -1,18 +1,29 @@
 import React, { Component } from "react";
 import faker from "faker";
+import axios from "axios";
 
 import "./assets/stylesheets/style.scss";
 import Comment from "./components/Comment.jsx";
 import AppruvalCard from "./components/AppruvalCard.jsx";
 import SeasonDisplay from "./components/SeasonDisplay.jsx";
-import Pics from "./components/Pics.jsx";
 import SearchPanel from "./components/SearchPanel.jsx";
 import ListImages from "./components/ListImages.jsx";
 
 export default class App extends Component {
-  onSearchSubmit(term) {
-    console.log(term);
-  }
+  state = { imagesUnsplash: [] };
+
+  // получаем данные используя async - await через функцию стрелку
+  onSearchSubmit = async (term) => {
+    const response = await axios.get("https://api.unsplash.com/search/photos", {
+      params: { query: term },
+      headers: {
+        Authorization: "Client-ID 3rY_EnH_TzPpeChp3KXXbKEgRXHDR6V6zApbhaYF-Ko",
+      },
+    });
+
+    // обновляем стейт
+    this.setState({ imagesUnsplash: response.data.results });
+  };
 
   render() {
     return (
@@ -47,7 +58,7 @@ export default class App extends Component {
         </AppruvalCard>
 
         <SearchPanel onSubmit={this.onSearchSubmit} />
-        <ListImages />
+        <ListImages imagesGet={this.state.imagesUnsplash} />
       </div>
     );
   }
