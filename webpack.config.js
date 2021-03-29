@@ -27,7 +27,7 @@ module.exports = (env) => {
       port: 3000,
       overlay: true, // выводит на странице ошибку
       hot: true,
-      open: true,
+      open: false,
       stats: "errors-only", // только ошибки в консоле
       clientLogLevel: "none",
     },

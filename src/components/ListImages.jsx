@@ -1,3 +1,5 @@
+import "./ListImages.css";
+
 const ListImages = (props) => {
   const images = props.imagesGet.map((image) => {
     return (
@@ -5,7 +7,7 @@ const ListImages = (props) => {
     );
   });
 
-  return <div>{images}</div>;
+  return <div className="image__list">{images}</div>;
 };
 
 export default ListImages;
