@@ -1,6 +1,3 @@
-import React from "react";
-
-// обьект с конфигом
 const seasonConfig = {
   summer: {
     text: "so warm!",

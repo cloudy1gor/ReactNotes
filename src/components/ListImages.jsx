@@ -1,5 +1,3 @@
-import React from "react";
-
 const ListImages = (props) => {
   const images = props.imagesGet.map((image) => {
     return (

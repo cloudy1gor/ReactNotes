@@ -1,5 +1,3 @@
-import React from "react";
-
 const Commetn = (props) => {
   return (
     <div className="comment">

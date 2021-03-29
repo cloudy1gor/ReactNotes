@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 
 import SeasonDisplayComponent from "./SeasonDisplayComponent.jsx";
 // import Spinner from "./Spinner.jsx";

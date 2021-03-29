@@ -52,11 +52,12 @@ module.exports = (env) => {
             loader: "babel-loader",
             options: {
               presets: [
-                "@babel/preset-env",
-                "@babel/preset-react",
-                {
-                  runtime: "automatic",
-                },
+                [
+                  "@babel/preset-react",
+                  {
+                    runtime: "automatic",
+                  },
+                ],
               ],
               plugins: [
                 [
@@ -213,3 +214,6 @@ module.exports = (env) => {
     ],
   };
 };
+
+// убирает неиспользуемые импорты
+// npx react-codemod update-react-imports
