@@ -6,14 +6,14 @@ export default class SearchPanel extends Component {
   onFormSubmit = (event) => {
     event.preventDefault();
 
-    // вызываю проп onSubmit с App в еомпонент класс
+    // вызываю проп onSubmit с App в компонент класс
     this.props.onSubmit(this.state.term);
   };
 
   render() {
     return (
       <div>
-        <form onSubmit={this.onFormSubmit} className="ui form" action="#">
+        <form onSubmit={this.onFormSubmit} className="ui form">
           <div className="ui field">
             <label>Search Panel</label>
             <input
