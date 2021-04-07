@@ -8,6 +8,23 @@ import AppruvalCard from "./components/AppruvalCard.jsx";
 import SeasonDisplay from "./components/SeasonDisplay.jsx";
 import SearchPanel from "./components/SearchPanel.jsx";
 import ListImages from "./components/ListImages.jsx";
+import Accordian from "./components/Accordian.jsx";
+
+// для аккардеона (hooks) передаем проп
+const items = [
+  {
+    title: "What is React?",
+    content: "is a front end framwork",
+  },
+  {
+    title: "title 2?",
+    content: "content 2",
+  },
+  {
+    title: "title 3?",
+    content: "content 3",
+  },
+];
 
 export default class App extends Component {
   state = { imagesUnsplash: [] };
@@ -59,6 +76,8 @@ export default class App extends Component {
 
         <SearchPanel onSubmit={this.onSearchSubmit} />
         <ListImages imagesGet={this.state.imagesUnsplash} />
+
+        <Accordian items={items} />
       </div>
     );
   }
