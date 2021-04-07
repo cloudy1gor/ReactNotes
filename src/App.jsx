@@ -8,7 +8,8 @@ import AppruvalCard from "./components/AppruvalCard.jsx";
 import SeasonDisplay from "./components/SeasonDisplay.jsx";
 import SearchPanel from "./components/SearchPanel.jsx";
 import ListImages from "./components/ListImages.jsx";
-import Accordian from "./components/Accordian.jsx";
+import Accordion from "./components/Accordion.jsx";
+import Search from "./components/Search.jsx";
 
 // для аккардеона (hooks) передаем проп
 const items = [
@@ -77,7 +78,8 @@ export default class App extends Component {
         <SearchPanel onSubmit={this.onSearchSubmit} />
         <ListImages imagesGet={this.state.imagesUnsplash} />
 
-        <Accordian items={items} />
+        <Search />
+        <Accordion items={items} />
       </div>
     );
   }
