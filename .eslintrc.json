@@ -30,6 +30,7 @@
     "prefer-destructuring": "off",
     "react/prop-types": 0,
     "class-methods-use-this": "off",
-    "arrow-body-style": ["off", "as-needed"]
+    "arrow-body-style": ["off", "as-needed"],
+    "no-unused-vars": ["warn"]
   }
 }
